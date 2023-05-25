@@ -42,16 +42,16 @@ function generateTriviaQuestions(questions, triviaContainer, resultsContainer, s
             answers = [];
 
             for(letter in questions[i].answers){
-                
+
     }
-}
+}}
 
 
 var triviaContainer = $("GameMode");
 var resultsContainer = $("BraggingResults");
 var startButton = $("startsportstrivia");
 
-
+console.log(startButton);
 
 
 
@@ -122,4 +122,4 @@ var sportsQuestions = [
             d: "New York Mets"
         },
         correctAnswer: "b"
-    }
+    }]}

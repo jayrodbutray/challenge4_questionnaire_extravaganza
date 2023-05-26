@@ -22,7 +22,6 @@ let talley = 0;
 function showQuestion(){
     var questionEl = document.getElementById("question");
     var answerEl = document.getElementById("answers");
-    var buttonEl = document.getElementById("button");
     var finalTalleyEl = document.getElementById("finalresults");
 
     var currentQuestionObject = questions[currentQuestion];
@@ -73,8 +72,15 @@ function showFinalTalley(){
     finalScoreEl.textContent = "Quiz is complete. Your Score: " + score + "out of" + questions.length;
     quizContainer.appendChild(finalScoreEl);
 }
+function beginQuiz(){
+    var beginButton = document.getElementById("button");
+    beginButton.addEventListener("click", function(){
+        var quizContainer = document.getElementById("Quiz-box");
+        quizContainer.removeChild(beginButton);
+        displayQuestion();
+    });
+}
 
-displayQuestion
 
 
 for (let i = 0; i < sportsQuestions.length; i++) {
@@ -102,9 +108,3 @@ function writeQuestion(questionObj){
             console.log("Incorrect. The correct answer is:", correctAnswer);
         }
     };
-
-var button = document.getElementById("button");
-
-button.addEventListener("click", function() {
-    console.log("button clicked!");
-});

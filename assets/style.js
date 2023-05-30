@@ -61,6 +61,7 @@ function showQuestion(){
     for(let i = 0; i< currentQuestionObject.answers.length; i++){
         //create a button for an answer element
         var answerButton = document.createElement("button");
+        
         //creating text for current answer
         console.log(currentQuestionObject.answers, i, currentQuestionObject.answers[i]);
         answerButton.textContent = currentQuestionObject.answers[i];
@@ -74,28 +75,26 @@ function showQuestion(){
             },1000);
 
         });
-
-        startTimer();
+      
 
         function startTimer(){
-            
+            clearTimeout();
             var sec = 59;
-            var timer = setInterval(function(){
-                document.getElementById("timerstart").innerHTML="00:"+sec;
+            var timer;
+            timer = setInterval(function(){
+            document.getElementById("timerstart").innerHTML="00:"+sec;
                 sec--;
                 if (sec < 0) {
-                    clearInterval(timer);
                     alert("Time is up!")
                     return
                 }
             }, 1000);
         }
-
+        startTimer();
 
     answerEl.appendChild(answerButton);  
     }
     
-   
 }
 
 function chosenAnswer(answer, finalTalleyEl){

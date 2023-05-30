@@ -38,11 +38,12 @@ beginButton.addEventListener("click", function (){
     beginButton.style.display = "none";
     document.getElementById("introtext").style.display = "none";
     showQuestion();
-})
-
+}); 
 
 let currentQuestion = 0;
 let talley = 0;
+
+
 
 function showQuestion(){
     //fetch all the elements from the html that we need for this function
@@ -52,6 +53,7 @@ function showQuestion(){
 //fetch our current question data
     var currentQuestionObject = sportsQuestions[currentQuestion];
     //sending our question to appropriate element in the html
+    console.log(currentQuestionObject);
     questionEl.textContent = currentQuestionObject.question;
 //remove everything from our answer element in prep to add new things
     answerEl.innerHTML = "";
@@ -69,17 +71,31 @@ function showQuestion(){
                 currentQuestion++
                 showQuestion();
                 finalTalleyEl.textContent = "";
-                console.log(finalTalleyEl);
-            },1000)
+            },1000);
 
         });
+
+        startTimer();
+
+        function startTimer(){
+            
+            var sec = 59;
+            var timer = setInterval(function(){
+                document.getElementById("timerstart").innerHTML="00:"+sec;
+                sec--;
+                if (sec < 0) {
+                    clearInterval(timer);
+                    alert("Time is up!")
+                    return
+                }
+            }, 1000);
+        }
+
 
     answerEl.appendChild(answerButton);  
     }
     
-      //  submitButton.addEventListener("click", function(){
-        //    nextQuestion(finalTalleyEl);
-       // });
+   
 }
 
 function chosenAnswer(answer, finalTalleyEl){
@@ -90,63 +106,10 @@ function chosenAnswer(answer, finalTalleyEl){
         talley++;
     } else {
         finalTalleyEl.textContent = "Incorrect!. The correct answer is: " + currentQuestionObject.correctAnswer;
-    }
-}
-/*
-
-function nextQuestion(finalTalleyEl) {
-    finalTalleyEl.textContent = "";
-    currentQuestion++;
-
-    if(currentQuestion === 
-        questions.length){
-        showFinalTalley();
-    }else{
-        displayQuestion();
-    }
-}
-
-function showFinalTalley(){
-    var quizContainer = document.getElementById("Quiz-box");
-    quizContainer.innerHTML = "";
-
-    var finalScoreEl = document.createElement("h1");
-    finalScoreEl.textContent = "Quiz is complete. Your Score: " + score + "out of" + questions.length;
-    quizContainer.appendChild(finalScoreEl);
-}
-function beginQuiz(){
-    var beginButton = document.getElementById("button");
-    beginButton.addEventListener("click", function(){
-        var quizContainer = document.getElementById("Quiz-box");
-        quizContainer.removeChild(beginButton);
-        displayQuestion();
-    });
-}
+        talley--;
+    };
+};
 
 
 
-for (let i = 0; i < sportsQuestions.length; i++) {
-    writeQuestion(questions[i]);
-    
-}
 
-function writeQuestion(questionObj){
-    var question = questionObj.question;
-    var answers = questionObj.answers;
-    var correctAnswer = questionObj.correctAnswer;
-    
-    console.log(question);
-    for (let i = 0; i < answers.length; i++) {
-        console.log((i + 1) + "." + answers[i]);
-        
-    }
-
-    var choice = prompt("Select the correct choice:");
-    var selectedAnswer = answers[choice - 1];
-
-    if (selectedAnswer === correctAnswer) {
-        console.log("Correct");
-        } else {
-            console.log("Incorrect. The correct answer is:", correctAnswer);
-        }
-*/

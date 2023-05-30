@@ -1,3 +1,9 @@
 div h2 {
     text-align: center;
+    color: firebrick;
+}
+
+#introtext {
+    text-align: center;
+    color: crimson;
 }

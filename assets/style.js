@@ -38,12 +38,27 @@ beginButton.addEventListener("click", function (){
     beginButton.style.display = "none";
     document.getElementById("introtext").style.display = "none";
     showQuestion();
+    startTimer();
 }); 
+function startTimer(){
+    clearTimeout();
+    var sec = 59;
+    var timer;
+    timer = setInterval(function(){
+    document.getElementById("timerstart").innerHTML="00:"+sec;
+        sec--;
+        if (sec < 0) {
+            alert("Time is up!")
+            return
+        }
+    }, 1000);
+}
 
-let currentQuestion = 0;
-let talley = 0;
 
 
+var currentQuestion = 0;
+var talleyRight = 0
+var talleyWrong = 0
 
 function showQuestion(){
     //fetch all the elements from the html that we need for this function
@@ -77,21 +92,6 @@ function showQuestion(){
         });
       
 
-        function startTimer(){
-            clearTimeout();
-            var sec = 59;
-            var timer;
-            timer = setInterval(function(){
-            document.getElementById("timerstart").innerHTML="00:"+sec;
-                sec--;
-                if (sec < 0) {
-                    alert("Time is up!")
-                    return
-                }
-            }, 1000);
-        }
-        startTimer();
-
     answerEl.appendChild(answerButton);  
     }
     
@@ -102,12 +102,26 @@ function chosenAnswer(answer, finalTalleyEl){
     var currentQuestionObject = sportsQuestions[currentQuestion];
     if(answer === currentQuestionObject.correctAnswer) {
         finalTalleyEl.textContent = "Correct!";
-        talley++;
+        talleyRight++;
     } else {
         finalTalleyEl.textContent = "Incorrect!. The correct answer is: " + currentQuestionObject.correctAnswer;
-        talley--;
-    };
-};
+        talleyWrong--;
+    }
+}
+
+function showFinalTalley(){
+    var quizContainer = document.getElementById("Quiz-box");
+    quizContainer.innerHTML = "";
+    if(currentQuestionObject.length !== 0) {
+        return;
+    }
+    var finalscoreEl = document.createElement("h1");
+    finalscoreEl.textContent = "Quiz is complete. Your Score: " + score;
+    score = localStorage.getElementById("finalresults");
+    sportsQuestions.length;
+    quizContainer.appendChild(finalscoreEl);
+}
+
 
 
 

@@ -45,21 +45,18 @@ function startTimer(){
     var sec = 59;
     var timer;
     timer = setInterval(function(){
-    document.getElementById("timerstart").innerHTML="00:"+sec;
+    document.getElementById("timerstart").innerHTML="00:"+ sec;
         sec--;
         if (sec < 0) {
-            alert("Time is up!")
-            return
+            alert("Time is up!");
         }
     }, 1000);
 }
 
-
-
 var currentQuestion = 0;
 var talleyRight = 0
 var talleyWrong = 0
-
+var score = 0
 function showQuestion(){
     //fetch all the elements from the html that we need for this function
     var questionEl = document.getElementById("question");
@@ -70,9 +67,9 @@ function showQuestion(){
     //sending our question to appropriate element in the html
     console.log(currentQuestionObject);
     questionEl.textContent = currentQuestionObject.question;
-//remove everything from our answer element in prep to add new things
+    //remove everything from our answer element in prep to add new things
     answerEl.innerHTML = "";
-    //loop through all answers of our current question
+    //loop through all answers of our current questions
     for(let i = 0; i< currentQuestionObject.answers.length; i++){
         //create a button for an answer element
         var answerButton = document.createElement("button");
@@ -87,14 +84,13 @@ function showQuestion(){
                 currentQuestion++
                 showQuestion();
                 finalTalleyEl.textContent = "";
+                
             },1000);
-
+            
         });
-      
-
-    answerEl.appendChild(answerButton);  
-    }
-    
+        
+        answerEl.appendChild(answerButton);  
+    } 
 }
 
 function chosenAnswer(answer, finalTalleyEl){
@@ -103,18 +99,30 @@ function chosenAnswer(answer, finalTalleyEl){
     if(answer === currentQuestionObject.correctAnswer) {
         finalTalleyEl.textContent = "Correct!";
         talleyRight++;
+        if(currentQuestionObject === undefined){
+            endSportsQuiz();
+            return
+        }
+        
     } else {
-        finalTalleyEl.textContent = "Incorrect!. The correct answer is: " + currentQuestionObject.correctAnswer;
+        finalTalleyEl.textContent = "Incorrect! The correct answer is: " + currentQuestionObject.correctAnswer;
         talleyWrong--;
     }
-}
+    };
 
-function showFinalTalley(){
+
+function endSportsQuiz(){
+
+
+localStorage.setItem("correctAnswers" , correctAnswers);
+localStorage.setItem("incorrectAnswers" , incorrectAnswers);
+
+console.log("Quiz Ended!");
+console.log("Correct answers: " + talleyRight);
+console.log("Incorrect answers: " + talleyWrong);
+
     var quizContainer = document.getElementById("Quiz-box");
     quizContainer.innerHTML = "";
-    if(currentQuestionObject.length !== 0) {
-        return;
-    }
     var finalscoreEl = document.createElement("h1");
     finalscoreEl.textContent = "Quiz is complete. Your Score: " + score;
     score = localStorage.getElementById("finalresults");
@@ -122,7 +130,8 @@ function showFinalTalley(){
     quizContainer.appendChild(finalscoreEl);
 }
 
-
+//var storedTalleyRight = localStorage.getItem("correctAnswers");
+//var storedTalleyWrong = localStorage.getItem("incorrectAnswers");
 
 
 

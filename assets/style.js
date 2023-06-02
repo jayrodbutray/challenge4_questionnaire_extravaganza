@@ -109,8 +109,9 @@ function chosenAnswer(answer, finalTalleyEl){
         
     } else {
         finalTalleyEl.textContent = "Incorrect! The correct answer is: " + currentQuestionObject.correctAnswer;
-        talleyWrong--;
+        talleyWrong++;
     }
+    alert("You answered " + talleyRight + "question(s) correctly " + talleyWrong + "question(s) incorrectly " + ".");
     };
 
 
@@ -133,8 +134,8 @@ console.log("Incorrect answers: " + talleyWrong);
     quizContainer.appendChild(finalscoreEl);
 }
 
-//var storedTalleyRight = localStorage.getItem("correctAnswers");
-//var storedTalleyWrong = localStorage.getItem("incorrectAnswers");
+var storedTalleyRight = localStorage.getItem("correctAnswers", JSON.stringify(talleyRight));
+var storedTalleyWrong = localStorage.getItem("incorrectAnswers", JSON.stringify(talleyWrong));
 
 
 

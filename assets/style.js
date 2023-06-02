@@ -42,13 +42,13 @@ beginButton.addEventListener("click", function (){
 }); 
 function startTimer(){
     clearTimeout();
-    var sec = 59;
-    var timer;
     timer = setInterval(function(){
     document.getElementById("timerstart").innerHTML="00:"+ sec;
         sec--;
         if (sec < 0) {
             alert("Time is up!");
+            clearInterval(timer);
+            endSportsQuiz();
         }
     }, 1000);
 }
@@ -57,6 +57,8 @@ var currentQuestion = 0;
 var talleyRight = 0
 var talleyWrong = 0
 var score = 0
+var sec = 59;
+var timer;
 function showQuestion(){
     //fetch all the elements from the html that we need for this function
     var questionEl = document.getElementById("question");
@@ -64,6 +66,11 @@ function showQuestion(){
     var finalTalleyEl = document.getElementById("finalresults");
 //fetch our current question data
     var currentQuestionObject = sportsQuestions[currentQuestion];
+    if(currentQuestionObject === undefined){
+            clearInterval(timer);
+            endSportsQuiz();
+            return
+        }
     //sending our question to appropriate element in the html
     console.log(currentQuestionObject);
     questionEl.textContent = currentQuestionObject.question;
@@ -99,10 +106,6 @@ function chosenAnswer(answer, finalTalleyEl){
     if(answer === currentQuestionObject.correctAnswer) {
         finalTalleyEl.textContent = "Correct!";
         talleyRight++;
-        if(currentQuestionObject === undefined){
-            endSportsQuiz();
-            return
-        }
         
     } else {
         finalTalleyEl.textContent = "Incorrect! The correct answer is: " + currentQuestionObject.correctAnswer;
@@ -114,8 +117,8 @@ function chosenAnswer(answer, finalTalleyEl){
 function endSportsQuiz(){
 
 
-localStorage.setItem("correctAnswers" , correctAnswers);
-localStorage.setItem("incorrectAnswers" , incorrectAnswers);
+localStorage.setItem("correctAnswers" , talleyRight);
+localStorage.setItem("incorrectAnswers" , talleyWrong);
 
 console.log("Quiz Ended!");
 console.log("Correct answers: " + talleyRight);
@@ -125,7 +128,7 @@ console.log("Incorrect answers: " + talleyWrong);
     quizContainer.innerHTML = "";
     var finalscoreEl = document.createElement("h1");
     finalscoreEl.textContent = "Quiz is complete. Your Score: " + score;
-    score = localStorage.getElementById("finalresults");
+    score = document.getElementById("finalresults");
     sportsQuestions.length;
     quizContainer.appendChild(finalscoreEl);
 }

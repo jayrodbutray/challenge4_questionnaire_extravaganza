@@ -56,7 +56,6 @@ function startTimer(){
 var currentQuestion = 0;
 var talleyRight = 0
 var talleyWrong = 0
-var score = 0
 var sec = 59;
 var timer;
 function showQuestion(){
@@ -111,15 +110,11 @@ function chosenAnswer(answer, finalTalleyEl){
         finalTalleyEl.textContent = "Incorrect! The correct answer is: " + currentQuestionObject.correctAnswer;
         talleyWrong++;
     }
-    alert("You answered " + talleyRight + "question(s) correctly " + talleyWrong + "question(s) incorrectly " + ".");
+
     };
 
 
 function endSportsQuiz(){
-
-
-localStorage.setItem("correctAnswers" , talleyRight);
-localStorage.setItem("incorrectAnswers" , talleyWrong);
 
 console.log("Quiz Ended!");
 console.log("Correct answers: " + talleyRight);
@@ -128,14 +123,39 @@ console.log("Incorrect answers: " + talleyWrong);
     var quizContainer = document.getElementById("Quiz-box");
     quizContainer.innerHTML = "";
     var finalscoreEl = document.createElement("h1");
-    finalscoreEl.textContent = "Quiz is complete. Your Score: " + score;
-    score = document.getElementById("finalresults");
+    finalscoreEl.textContent = "Quiz is complete. Your Score: " + (talleyRight + sec - talleyWrong);
+
     sportsQuestions.length;
-    quizContainer.appendChild(finalscoreEl);
+    quizContainer.appendChild(finalscoreEl); 
+    alert("You answered " + talleyRight + " question(s) correctly " + talleyWrong + " question(s) incorrectly " + ".");
+};
+var userData = [];
+
+function handleHighScores(event){
+    event.preventDefault();
+
+
+var initials = document.getElementById("initials").ariaValueMax;
+var score = JSON.parse(document.getElementById("score").value);
+var userScore = (talleyRight + sec - talleyWrong);
+
+
+
+document.getElementById("initials").value = "";
+document.getElementById("score").value = "";
+
+console.log(userData);
 }
 
-var storedTalleyRight = localStorage.getItem("correctAnswers", JSON.stringify(talleyRight));
-var storedTalleyWrong = localStorage.getItem("incorrectAnswers", JSON.stringify(talleyWrong));
+function storeUserData(initials, score){
+    var user = {
+        initials : initials,
+        score: score,
+    };
+    userData.push(user);
 
+    }
 
-
+storeUserData(initials, score);
+var form = getElementById("userscoreform");
+form.addEventListener("submit", handleHighScores);

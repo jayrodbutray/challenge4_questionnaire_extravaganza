@@ -15,6 +15,16 @@ var sportsQuestions = [
         correctAnswer: "Atlanta Braves"
        
     },
+    {
+        question: "After whom was the NBA logo we now see styled?",
+        answers: ["Michael Jordan", "Jerry West", "Lebron James", "Wilt Chamberland"],
+        correctAnswer: "Jerry West"
+    },
+    {
+        question: "On which team was Wayne Gretsky before dominating hockey as an LA King member?",
+        answers: ["Pittsburgh Penguins", "Colorado Avalanche", "NY Rangers", "Edmonton Oilers"],
+        correctAnswer: "Edmonton Oilers"
+    },
 ];
 console.log(sportsQuestions);
 /*When complete a user should be able to load a page and start a quiz with questions and answers and have a score tallied for right and wrong answers.
@@ -128,34 +138,7 @@ console.log("Incorrect answers: " + talleyWrong);
     sportsQuestions.length;
     quizContainer.appendChild(finalscoreEl); 
     alert("You answered " + talleyRight + " question(s) correctly " + talleyWrong + " question(s) incorrectly " + ".");
+    console.log("finalScoreEl");
 };
-var userData = [];
-
-function handleHighScores(event){
-    event.preventDefault();
 
 
-var initials = document.getElementById("initials").ariaValueMax;
-var score = JSON.parse(document.getElementById("score").value);
-var userScore = (talleyRight + sec - talleyWrong);
-
-
-
-document.getElementById("initials").value = "";
-document.getElementById("score").value = "";
-
-console.log(userData);
-}
-
-function storeUserData(initials, score){
-    var user = {
-        initials : initials,
-        score: score,
-    };
-    userData.push(user);
-
-    }
-
-storeUserData(initials, score);
-var form = getElementById("userscoreform");
-form.addEventListener("submit", handleHighScores);

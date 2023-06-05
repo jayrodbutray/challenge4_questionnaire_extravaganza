@@ -68,6 +68,7 @@ var talleyRight = 0
 var talleyWrong = 0
 var sec = 59;
 var timer;
+
 function showQuestion(){
     //fetch all the elements from the html that we need for this function
     var questionEl = document.getElementById("question");
@@ -140,5 +141,4 @@ console.log("Incorrect answers: " + talleyWrong);
     alert("You answered " + talleyRight + " question(s) correctly " + talleyWrong + " question(s) incorrectly " + ".");
     console.log("finalScoreEl");
 };
-
 

@@ -68,6 +68,7 @@ var talleyRight = 0
 var talleyWrong = 0
 var sec = 59;
 var timer;
+var finalUserScoreArray = JSON.parse(localStorage.getItem("score")) || [];
 
 function showQuestion(){
     //fetch all the elements from the html that we need for this function
@@ -134,11 +135,21 @@ console.log("Incorrect answers: " + talleyWrong);
     var quizContainer = document.getElementById("Quiz-box");
     quizContainer.innerHTML = "";
     var finalscoreEl = document.createElement("h1");
-    finalscoreEl.textContent = "Quiz is complete. Your Score: " + (talleyRight + sec - talleyWrong);
+    var finalScore = (talleyRight + sec - talleyWrong);
+
+    finalscoreEl.textContent = "Quiz is complete. Your Score: " + finalScore;
 
     sportsQuestions.length;
     quizContainer.appendChild(finalscoreEl); 
     alert("You answered " + talleyRight + " question(s) correctly " + talleyWrong + " question(s) incorrectly " + ".");
     console.log("finalScoreEl");
+    
 };
 
+localStorage.setItem("score", "finalscore");
+var userInitials = ["finalscore"];
+localStorage.setItem("score", JSON.stringify(userInitials));
+
+localStorage.getItem("score");
+JSON.parse(localStorage.getItem("score"));
+console.log("score");

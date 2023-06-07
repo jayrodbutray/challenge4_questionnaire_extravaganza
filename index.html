@@ -6,20 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Best Sports Game You Don't Wanna Miss</title>
     <link rel="stylesheet" href="./assets/style.css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
 </head>
 <body>
     <div id= "Quiz-box">
         <h2>Timed Quiz</h2>
         <button id="button">Click to Start the Game if you Dare!</button>
+
             <p id= "introtext">You will be given four answers to each question, of which only one is correct. Your results will be saved and calculated at the end. Good Luck!</p>
             <div id = "timerstart"></div>
         <div id="question"></div>
         <div id="answers"></div>   
         <div id="finalresults"></div>
-        <div id="highscore"></div>
-        <form> <label for="name" id="name">User Initials</label><br/> <input name="name" id="name"> </form>
-
+    </div>
+        <div id="highscore" class="hide">
+            <form id = "userform"> <label for="name">User Initials</label><br> 
+                <input type="text" name="name" id="name">
+                <input type = "submit" value = "Save Initials & Score">
+            </form>
+        </div>
+           
+        <p id="scorelog"></p>
     
     <main>
         <script type="text/javascript" src="./assets/style.js"></script>

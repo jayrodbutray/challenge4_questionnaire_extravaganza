@@ -138,18 +138,30 @@ console.log("Incorrect answers: " + talleyWrong);
     var finalScore = (talleyRight + sec - talleyWrong);
 
     finalscoreEl.textContent = "Quiz is complete. Your Score: " + finalScore;
-
+    var scoreBox = document.getElementById("highscore");
+    scoreBox.classList.remove("hide");
     sportsQuestions.length;
     quizContainer.appendChild(finalscoreEl); 
     alert("You answered " + talleyRight + " question(s) correctly " + talleyWrong + " question(s) incorrectly " + ".");
-    console.log("finalScoreEl");
     
-};
 
-localStorage.setItem("score", "finalscore");
+
+localStorage.setItem("score", finalScore);
+
 var userInitials = ["finalscore"];
 localStorage.setItem("score", JSON.stringify(userInitials));
 
 localStorage.getItem("score");
 JSON.parse(localStorage.getItem("score"));
 console.log("score");
+};
+
+
+function playerScoreSubmit(event) {
+    document.textContent = "User Initials and Score Saved!"
+    }
+
+  
+  var userForm = document.getElementById("userform");
+var  userScoreLog = document.getElementById("scorelog");
+  userForm.addEventListener("submit", playerScoreSubmit);

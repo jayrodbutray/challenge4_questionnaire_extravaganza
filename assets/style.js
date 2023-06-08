@@ -143,22 +143,25 @@ console.log("Incorrect answers: " + talleyWrong);
     sportsQuestions.length;
     quizContainer.appendChild(finalscoreEl); 
     alert("You answered " + talleyRight + " question(s) correctly " + talleyWrong + " question(s) incorrectly " + ".");
-    localStorage.setItem("score", finalScore);
 
-    var storeScore = localStorage.getItem("score");
+    var storeScore = JSON.stringify(finalScore);
+    localStorage.setItem("userscore", storeScore);
     console.log(storeScore);
     scoreBox.addEventListener("submit", function(event){
         event.preventDefault();
-      });
 
-localStorage.setItem("score", finalScore);
-
-
-localStorage.getItem(finalScore);
-JSON.parse(localStorage.getItem("score"));
-
-};
+    var userInitials = document.getElementById("initialsInput").value;
+    console.log(userInitials);
+    
+    localStorage.getItem(finalScore);
 
 
-
- 
+    var highScores = localStorage.getItem("highscore")
+    var highScoresList = document.getElementById("scorelog");
+    parsedHighScores.forEach(function(finalScore){
+        var listScores = document.createElement("li");
+        listScores.textContent = finalScore.userInitials + ":" + finalScore.finalScore;
+        highScoresList.appendChild(listScores);
+    })
+});
+}

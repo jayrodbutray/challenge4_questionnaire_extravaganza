@@ -19,13 +19,14 @@
         <div id="finalresults"></div>
     </div>
         <div id="highscore" class="hide">
-            <form id = "userform"> <label for="name">User Initials</label><br> 
-                <input type="text" name="name" id="name">
-                <input type = "submit" value = "Save Initials & Score">
+            <form id = "userform"> <label for="initialsInput">Enter Your Initials</label> 
+                <input type="text" id = "initialsInput" required maxlength="3">
+                <button type = "submit">Submit Initials and Score</button>
             </form>
         </div>
            
-        <p id="scorelog"></p>
+        <h1>High Scores</h1>
+        <ul id ="scorelog"></ul>
     
     <main>
         <script type="text/javascript" src="./assets/style.js"></script>

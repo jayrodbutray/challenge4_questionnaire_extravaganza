@@ -62,12 +62,17 @@ function startTimer(){
         }
     }, 1000);
 }
+  function timeReductionForWrongAnswer(){
+            sec -= timeReduction;
+            console.log("Time reduced to:", sec);
+    }
 
 var currentQuestion = 0;
 var talleyRight = 0
 var talleyWrong = 0
 var sec = 59;
 var timer;
+var timeReduction = 10;
 var finalUserScoreArray = JSON.parse(localStorage.getItem("score")) || [];
 
 function showQuestion(){
@@ -121,9 +126,9 @@ function chosenAnswer(answer, finalTalleyEl){
     } else {
         finalTalleyEl.textContent = "Incorrect! The correct answer is: " + currentQuestionObject.correctAnswer;
         talleyWrong++;
-    }
-
-    };
+        timeReductionForWrongAnswer();
+    } 
+};
 
 
 function endSportsQuiz(){
@@ -144,23 +149,23 @@ console.log("Incorrect answers: " + talleyWrong);
     quizContainer.appendChild(finalscoreEl); 
     alert("You answered " + talleyRight + " question(s) correctly " + talleyWrong + " question(s) incorrectly " + ".");
 
-    var storeScore = JSON.stringify(finalScore);
-    localStorage.setItem("userscore", storeScore);
-    console.log(storeScore);
+
     scoreBox.addEventListener("submit", function(event){
         event.preventDefault();
 
     var userInitials = document.getElementById("initialsInput").value;
     console.log(userInitials);
-    
-    localStorage.getItem(finalScore);
+    var scoreObject = {
+        score: finalScore,
+        user: userInitials,
+    }
+    finalUserScoreArray.push(scoreObject);
+    localStorage.setItem("score", JSON.stringify(finalUserScoreArray));
 
-
-    var highScores = localStorage.getItem("highscore")
     var highScoresList = document.getElementById("scorelog");
-    parsedHighScores.forEach(function(finalScore){
+    finalUserScoreArray.forEach(function(finalScore){
         var listScores = document.createElement("li");
-        listScores.textContent = finalScore.userInitials + ":" + finalScore.finalScore;
+        listScores.textContent = finalScore.user + ":" + finalScore.score;
         highScoresList.appendChild(listScores);
     })
 });

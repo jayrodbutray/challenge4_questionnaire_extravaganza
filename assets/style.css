@@ -6,8 +6,10 @@ div h2 {
 #introtext {
     text-align: center;
     color: crimson;
+    font-family: fantasy;
 }
 
 .hide {
     display: none;
 }
+
